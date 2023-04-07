@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent
   ],
-  imports: [
+  imports: [ //Just modules are imported
     BrowserModule,
     AppRoutingModule
   ],
