@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./media-player.component.css']
 })
 export class MediaPlayerComponent {
-
+  mockCover: any ={
+    cover:'https://jenesaispop.com/wp-content/uploads/2009/09/guetta_onelove.jpg',
+    album:'One Love',
+    name:'Getting Over'
+  }
 }
