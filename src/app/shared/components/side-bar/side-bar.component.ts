@@ -29,7 +29,7 @@ export class SideBarComponent {
       {
         name:"Your Library",
         icon:"uil-list-ul",
-        router: ['/','favorites']
+        router: ['/','tracks']
       }
     ]
 
@@ -42,7 +42,7 @@ export class SideBarComponent {
       {
         name:"Favorites",
         icon:"uil-heart",
-        router: ['/','history']
+        router: ['/','favorites']
       }
     ]
 
