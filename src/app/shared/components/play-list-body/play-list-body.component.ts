@@ -9,9 +9,18 @@ import * as dataRaw from '@data/tracks.json'
 })
 export class PlayListBodyComponent {
   tracks: Array<TrackModel> =[]
+  optionSort: {property:string|null, sort:string} ={property:null,sort:'asc'}
 
   ngOnInit(): void {
     const {data}:any =dataRaw
     this.tracks = data
+  }
+
+  changeSort(property:string){
+    const {sort} = this.optionSort
+    this.optionSort={
+      property,
+      sort:sort == 'asc'?'desc':'asc'
+    }
   }
 }
