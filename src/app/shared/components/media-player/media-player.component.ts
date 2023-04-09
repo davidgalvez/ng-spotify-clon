@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TrackModel } from '@core/models/tracks.model';
 
 @Component({
   selector: 'app-media-player',
@@ -6,9 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./media-player.component.css']
 })
 export class MediaPlayerComponent {
-  mockCover: any ={
+  mockCover: TrackModel ={   
+    _id:1, 
     cover:'https://jenesaispop.com/wp-content/uploads/2009/09/guetta_onelove.jpg',
     album:'One Love',
-    name:'Getting Over'
+    name:'Getting Over'    
   }
 }
