@@ -1,16 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { MultimediaService } from '@shared/services/multimedia.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-media-player',
   templateUrl: './media-player.component.html',
   styleUrls: ['./media-player.component.css']
 })
-export class MediaPlayerComponent {
+export class MediaPlayerComponent implements OnInit, OnDestroy {
   mockCover: TrackModel ={   
     _id:1, 
     cover:'https://jenesaispop.com/wp-content/uploads/2009/09/guetta_onelove.jpg',
     album:'One Love',
     name:'Getting Over'    
+  }
+  listObservers$:Array<any>=[]
+  constructor(private _multimediaService:MultimediaService){}
+
+  ngOnInit(): void {
+    const observer1$:Subscription = this._multimediaService.callback.subscribe(
+      (response:TrackModel) =>{
+        console.log("recibiendo cancion: ",response)
+      }
+    )
+
+    this.listObservers$=[observer1$]
+  }
+
+  ngOnDestroy(): void {
+    this.listObservers$.forEach(o => o.unsubscribe())
+    console.log("saliendo!!")
   }
 }
