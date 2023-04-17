@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@modules/auth/Services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginPageComponent {
   formLogin:FormGroup = new FormGroup({})
   errorLogin:boolean=false
   
-  constructor(private _authService: AuthService){
+  constructor(private _authService: AuthService, private router:Router){
 
   }
 
@@ -36,6 +37,7 @@ export class LoginPageComponent {
     //http response: 200 to <400
     .subscribe(responseOk=>{//when user enters correct login info
       console.log("Login successful")
+      this.router.navigate(['/','tracks'])
     },
     //http response: >=400
     err=>{

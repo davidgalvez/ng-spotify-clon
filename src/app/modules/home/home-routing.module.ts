@@ -15,8 +15,9 @@ const routes: Routes = [
     loadChildren: () => import(`@modules/history/history.module`).then(m => m.HistoryModule)
   },
   {
-    path:'*',
-    redirectTo: 'tracks'
+    path:'',
+    loadChildren: () => import(`@modules/tracks/tracks.module`).then(m => m.TracksModule)
+    //redirectTo: 'tracks'
   } 
 ];
 
