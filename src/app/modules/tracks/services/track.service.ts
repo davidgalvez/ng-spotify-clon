@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
 import { Observable, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators'
+import { catchError, map, mergeMap, tap } from 'rxjs/operators'
 import * as dataRaw from '@data/tracks.json';
 import { Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
@@ -39,7 +39,14 @@ export class TrackService {
   getAllRandom$():Observable<any>{
     return this.httpClient.get(`${this.URL}/tracks`)
     .pipe(
-      mergeMap(({data}:any)=>this.skipById(data,2))
+      tap(data => console.log("dataAPi",data)),
+      mergeMap(({data}:any)=>this.skipById(data,2)),
+      tap(data=>console.log("dataFiltered",data)),
+      catchError((err)=>{
+        console.log("Error in Api Service:",err);
+        return of([])
+      })
+
     )
   }
 
