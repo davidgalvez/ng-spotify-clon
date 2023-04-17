@@ -19,7 +19,7 @@ export class SideBarComponent {
       {
         name:"Home",
         icon:"uil-estate",
-        router: ['/','auth']
+        router: ['/','tracks']
       },
       {
         name:"Search",

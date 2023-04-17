@@ -9,6 +9,7 @@ import { AuthService } from '@modules/auth/Services/auth.service';
 })
 export class LoginPageComponent {
   formLogin:FormGroup = new FormGroup({})
+  errorLogin:boolean=false
   
   constructor(private _authService: AuthService){
 
@@ -32,5 +33,15 @@ export class LoginPageComponent {
   sendLogin():void{
     const {email,password} = this.formLogin.value
     this._authService.sendCredentials(email,password)
+    //http response: 200 to <400
+    .subscribe(responseOk=>{//when user enters correct login info
+      console.log("Login successful")
+    },
+    //http response: >=400
+    err=>{
+      this.errorLogin=true
+      console.log("Error on login, check email and password")
+    })
+
   }
 }
