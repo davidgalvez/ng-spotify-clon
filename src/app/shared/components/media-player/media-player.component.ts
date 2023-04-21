@@ -16,16 +16,25 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     name:'Getting Over'    
   }
   listObservers$:Array<any>=[]
-  constructor(private _multimediaService:MultimediaService){}
+  constructor(private multimediaService:MultimediaService){}
 
   ngOnInit(): void {
-    const observer1$:Subscription = this._multimediaService.callback.subscribe(
+    const observable1$=this.multimediaService.myObservable1$
+    .subscribe(
+      (responseOk)=>{
+        console.log('Funciona correctamente', responseOk)
+      },
+      (responseFail)=>{
+        console.log('Hay un error, se debe revisar',responseFail)
+      }
+    )
+    /*const observer1$:Subscription = this.multimediaService.callback.subscribe(
       (response:TrackModel) =>{
         console.log("recibiendo cancion: ",response)
       }
     )
 
-    this.listObservers$=[observer1$]
+    this.listObservers$=[observer1$]*/
   }
 
   ngOnDestroy(): void {
