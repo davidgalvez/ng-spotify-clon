@@ -5,5 +5,6 @@ export interface TrackModel {
     name:string,
     album:string,
     cover:string,
-    artist?:ArtistModel
+    artist?:ArtistModel,
+    url:string
 }

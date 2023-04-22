@@ -13,10 +13,11 @@ export class CardPlayerComponent implements OnInit {
     _id:1,
     name:'',
     album:'',
-    cover:''
+    cover:'',
+    url:''
   }
 
-  constructor(private _multimediaService:MultimediaService){}
+  constructor(private multimediaService:MultimediaService){}
 
   ngOnInit():void{
 
@@ -24,7 +25,7 @@ export class CardPlayerComponent implements OnInit {
 
   sendPlay(track:TrackModel):void{
     
-    this._multimediaService.callback.emit(track)
+   this.multimediaService.trackInfo$.next(track)
   }
 
 }

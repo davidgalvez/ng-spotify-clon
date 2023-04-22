@@ -9,32 +9,12 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./media-player.component.css']
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  mockCover: TrackModel ={   
-    _id:1, 
-    cover:'https://jenesaispop.com/wp-content/uploads/2009/09/guetta_onelove.jpg',
-    album:'One Love',
-    name:'Getting Over'    
-  }
+ 
   listObservers$:Array<any>=[]
-  constructor(private multimediaService:MultimediaService){}
+  constructor(public multimediaService:MultimediaService){}
 
   ngOnInit(): void {
-    const observable1$=this.multimediaService.myObservable1$
-    .subscribe(
-      (responseOk)=>{
-        console.log('Funciona correctamente', responseOk)
-      },
-      (responseFail)=>{
-        console.log('Hay un error, se debe revisar',responseFail)
-      }
-    )
-    /*const observer1$:Subscription = this.multimediaService.callback.subscribe(
-      (response:TrackModel) =>{
-        console.log("recibiendo cancion: ",response)
-      }
-    )
-
-    this.listObservers$=[observer1$]*/
+      
   }
 
   ngOnDestroy(): void {
