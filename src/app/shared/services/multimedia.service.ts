@@ -66,7 +66,8 @@ export class MultimediaService {
   }
 
   private setProgress(duration:number,currentTime:number):void{
-    let progress = Math.floor(((currentTime*100)/duration)%100)
+    let progress = ((currentTime*100)/duration)%100
+    this.timeProgress$.next(progress)
     console.log("progress:",progress)
   }
 
