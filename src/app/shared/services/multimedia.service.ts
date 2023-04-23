@@ -15,6 +15,8 @@ export class MultimediaService {
   public timeElapsed$:BehaviorSubject<string> = new BehaviorSubject('00:00')
   public timeRemaining$:BehaviorSubject<string> = new BehaviorSubject('-00:00')
   public timeProgress$:BehaviorSubject<number> = new BehaviorSubject(0)
+  public playerStatus$:BehaviorSubject<string> = new BehaviorSubject('paused')
+
 
   myObservable1$:BehaviorSubject<any> = new BehaviorSubject("💦💦💦")
 
@@ -40,13 +42,40 @@ export class MultimediaService {
     this.audio.play()
   }
 
+  public togglePlayer():void{
+    (this.audio.paused)?this.audio.play():this.audio.pause()
+  }
+
   private listenAllEvents():void{
     this.audio.addEventListener('timeupdate',this.calculateTime,false)
+    this.audio.addEventListener('playing',this.setPlayerStatus,false)
+    this.audio.addEventListener('play',this.setPlayerStatus,false)
+    this.audio.addEventListener('pause',this.setPlayerStatus,false)
+    this.audio.addEventListener('ended',this.setPlayerStatus,false)
    
   }
 
+  private setPlayerStatus=(state:any)=>{
+    console.log(state)
+    switch(state.type){
+      case 'play':
+        this.playerStatus$.next('play')
+        break
+      case 'playing':
+        this.playerStatus$.next('playing')
+        break
+      case 'ended':
+        this.playerStatus$.next('ended')
+        break
+      default:
+        this.playerStatus$.next('paused')
+        break
+    }
+
+  }
+
   private calculateTime=()=>{
-    console.log("disparando evento")
+    //console.log("disparando evento")
     const {duration, currentTime} = this.audio
     //console.table([duration, currentTime])
     this.setTimeElapsed(currentTime)
@@ -67,8 +96,7 @@ export class MultimediaService {
 
   private setProgress(duration:number,currentTime:number):void{
     let progress = ((currentTime*100)/duration)%100
-    this.timeProgress$.next(progress)
-    console.log("progress:",progress)
+    this.timeProgress$.next(progress)    
   }
 
   private convertTimeToFormat(time:number,positive:boolean):string{
