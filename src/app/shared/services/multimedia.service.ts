@@ -46,6 +46,14 @@ export class MultimediaService {
     (this.audio.paused)?this.audio.play():this.audio.pause()
   }
 
+  public seekAudioPosition(perc:number):void{
+    const {duration}=this.audio
+    console.log(`duration: ${duration} pct: ${perc}`)
+    const percToSeconds = (perc*duration)/100
+    this.audio.currentTime=percToSeconds
+
+  }
+
   private listenAllEvents():void{
     this.audio.addEventListener('timeupdate',this.calculateTime,false)
     this.audio.addEventListener('playing',this.setPlayerStatus,false)
