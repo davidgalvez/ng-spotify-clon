@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { HomePageComponent } from './home-page.component';
+import { SideBarComponent } from '@shared/components/side-bar/side-bar.component';
+import { MediaPlayerComponent } from '@shared/components/media-player/media-player.component';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -8,7 +10,8 @@ describe('HomePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomePageComponent ]
+      imports:[RouterTestingModule],
+      declarations: [ HomePageComponent, SideBarComponent, MediaPlayerComponent ]
     })
     .compileComponents();
 
