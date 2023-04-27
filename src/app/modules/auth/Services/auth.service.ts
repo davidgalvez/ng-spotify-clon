@@ -27,4 +27,8 @@ export class AuthService {
       })
     )
   }
+
+  checkSum(a:number,b:number){
+    return a+b
+  }
 }
